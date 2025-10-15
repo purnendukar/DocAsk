@@ -1,10 +1,10 @@
 from typing import Tuple, List
-from app.services.embeddings import OpenAIEmbeddingProvider
+from app.services.embeddings import HFEmbeddingProvider
 from app.services.vector_store import FaissVectorStore
 
 class RAGService:
     def __init__(self, emb_provider=None, vector_store=None, llm_client=None):
-        self.emb = emb_provider or OpenAIEmbeddingProvider(...)
+        self.emb = emb_provider or HFEmbeddingProvider()
         self.vs = vector_store or FaissVectorStore(dim=1536)
         self.llm_client = llm_client  # wrapper to LLM
 

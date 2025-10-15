@@ -1,12 +1,12 @@
 import uuid
 from typing import List
 from app.utils.text import chunk_text
-from app.services.embeddings import OpenAIEmbeddingProvider
+from app.services.embeddings import HFEmbeddingProvider
 from app.services.vector_store import FaissVectorStore
 
 class IngestionService:
     def __init__(self, embedding_provider=None, vector_store=None):
-        self.embedding_provider = embedding_provider or OpenAIEmbeddingProvider(...)
+        self.embedding_provider = embedding_provider or HFEmbeddingProvider()
         self.vector_store = vector_store or FaissVectorStore(dim=1536)
 
     async def ingest_file(self, upload_file) -> str:
