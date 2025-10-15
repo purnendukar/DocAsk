@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# Poetry
+.poetry/
+
+# Environment variables
+.env
+
+# Test & cache files
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Logs or temp data
+*.log
+
+# System files
+.DS_Store
+
+# PyCharm / JetBrains IDE
+.idea/
+*.iml

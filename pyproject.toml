@@ -1,0 +1,60 @@
+[project]
+name = "docask"
+version = "0.1.0"
+description = "Document ingestion and Retrieval-Augmented Generation (RAG) backend built with FastAPI"
+authors = [
+    {name = "Purnendu Kar",email = "purnendu.kar8@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "pydantic>=2.8.0",
+    "faiss-cpu>=1.9.0",
+    "numpy>=1.26.0",
+    "openai>=1.45.0",
+    "tiktoken>=0.7.0",
+    "python-multipart>=0.0.9",
+    "aiofiles>=24.1.0",
+    "python-dotenv>=1.0.1",
+    "typer>=0.12.3",
+]
+
+
+[tool.poetry]
+package-mode = false
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "httpx>=0.28.1",
+    "black>=24.8.0",
+    "flake8>=7.1.0",
+    "isort>=5.13.0",
+    "mypy>=1.11.0",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict_optional = true
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["app/tests"]
