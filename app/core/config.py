@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     app_env: str = Field("development", env="APP_ENV")
     app_host: str = Field("0.0.0.0", env="APP_HOST")
     app_port: int = Field(8000, env="APP_PORT")
+    api_version: str = Field("0.1.0", env="API_VERSION")
 
     # -------------------------------
     # HuggingFace Embeddings

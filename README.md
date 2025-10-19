@@ -66,13 +66,11 @@ DocAsk is a powerful document question-answering system built with FastAPI, leve
 
 Once the server is running, access the interactive API documentation at:
 - Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
 
 ## 🌐 API Endpoints
 
-- `POST /api/v1/ingest`: Upload and process documents
-- `POST /api/v1/query`: Query the document store
-- `GET /health`: Health check endpoint
+- `POST /api/v1/upload`: Upload and process documents
+- `POST /api/v1/ask`: Ask question related to doc
 
 ## 🧪 Testing
 
