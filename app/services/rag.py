@@ -102,6 +102,7 @@ class RAGService:
             
             # Generate the answer using the LLM with instructions to only use the context
             answer = await self.llm.generate(prompt)
+            print("answer", answer)
             
             # Verify the answer is grounded in the context
             if not self._is_answer_grounded(answer, contexts):
