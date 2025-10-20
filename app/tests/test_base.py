@@ -28,5 +28,26 @@ class BaseTestAPI:
         content = content or self.test_text
         file_path = self.tmp_path / filename
         file_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if file_path.suffix.lower() == '.pdf':
+            return self._create_test_pdf(file_path, content)
+            
         file_path.write_text(content)
+        return file_path
+        
+    def _create_test_pdf(self, file_path, content):
+        """Helper to create a simple PDF file for testing."""
+        from reportlab.lib.pagesizes import letter
+        from reportlab.pdfgen import canvas
+        
+        c = canvas.Canvas(str(file_path), pagesize=letter)
+        text = c.beginText(40, 750)  # Position text
+        text.setFont("Helvetica", 12)
+        
+        # Split content into lines that fit the page width
+        for line in content.split('\n'):
+            text.textLine(line)
+            
+        c.drawText(text)
+        c.save()
         return file_path

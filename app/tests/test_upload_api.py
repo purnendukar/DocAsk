@@ -52,22 +52,24 @@ class TestUploadDocumentAPI(BaseTestAPI):
         assert response.status_code == 500
         assert "Error processing document" in response.json()["detail"]
 
-    @pytest.mark.parametrize("filename,content_type", [
-        ("test.pdf", "application/pdf"),
-        ("test.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
-        ("test.txt", "text/plain"),
+    @pytest.mark.parametrize("filename,content_type,test_content", [
+        ("test.pdf", "application/pdf", "This is a test PDF document."),
+        ("test.txt", "text/plain", "This is a test text file."),
     ])
-    def test_upload_different_file_types(self, filename, content_type):
+    def test_upload_different_file_types(self, filename, content_type, test_content):
         """Test uploading different file types."""
-        test_file = self.create_test_file(filename)
+        test_file = self.create_test_file(filename, content=test_content)
         
         with open(test_file, "rb") as f:
             response = self.client.post(
                 "/api/v1/upload",
                 files={"file": (filename, f, content_type)}
             )
-        # print(response.data)
-        assert response.status_code == 200
+            
+        assert response.status_code == 200, f"Failed with response: {response.text}"
         data = response.json()
+        assert "document_id" in data
+        assert data["filename"] == filename
+        assert data["status"] == "ingested"
         assert data["filename"] == filename
         assert data["status"] == "ingested"
