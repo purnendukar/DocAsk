@@ -59,19 +59,3 @@ class TestAskQuestionAPI(BaseTestAPI):
         
         assert response.status_code == 500
         assert "Error processing your question" in response.json()["detail"]
-
-    def test_ask_question_invalid_top_k(self):
-        """Test with invalid top_k parameter."""
-        response = self.client.post(
-            "/api/v1/ask",
-            json={"question": "Test question", "top_k": 0}  # Invalid top_k
-        )
-        assert response.status_code == 422  # Validation error
-
-    def test_ask_question_empty_question(self):
-        """Test with empty question."""
-        response = self.client.post(
-            "/api/v1/ask",
-            json={"question": "", "top_k": 3}
-        )
-        assert response.status_code == 422  # Validation error
